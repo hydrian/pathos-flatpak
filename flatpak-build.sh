@@ -11,6 +11,7 @@ echo "Building Flatpak image..."
 pushd "$GIT_ROOT_DIR" 1>/dev/null
 test ! -d .flatpak && mkdir -p .flatpak
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
+	--default-branch=main \
 	--ccache \
   --force-clean \
   --keep-build-dirs \
