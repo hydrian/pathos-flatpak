@@ -55,26 +55,33 @@ function install_pathos {
     return 2
   fi
 
-  test ! -d "${FLATPAK_ADVENTURES_DIR}" && mkdir -p "${FLATPAK_ADVENTURES_DIR}"
-  if [ -e "${WINE_ADVENTURES_DIR}" ] ; then
-    echo "Removing stock Adventures directory" 
-    rm -Rf "${WINE_ADVENTURES_DIR}"
-  fi
   FLATPAK_PERSIT_CONFIG_DIRS=(
     "Settings"
     "Profiles"
   )
+  for DIR in "${FLATPAK_PERSIT_CONFIG_DIRS[@]}" ; do
+    FLATPAK_DIR="/var/config/Pathos/${DIR}"
+    WIN_DIR="${PATHOS_WINE_DIR}/${DIR}"
+    test ! -d "${FLATPAK_DIR}" && mkdir -p "${FLATPAK_DIR}"
+    test -e "${WIN_DIR}" && rm -Rf "${WIN_DIR}"
+    pushd "${PATHOS_WINE_DIR}" 1>/dev/null
+    ln -s "${FLATPAK_DIR}" "${DIR}"
+  done 
+
   FLATPAK_PERSIST_DATA_DIRS=(
     "Quests"
     "Adventures"
     "Tracks"
     "Sonics"
   )
-  ln -s "${FLATPAK_ADVENTURES_DIR}" "${WINE_ADVENTURES_DIR}"
-  if [ $? -ne 0 ] ; then 
-    echo "Failed to make symlink for adventures" 1>&2
-    return 2
-  fi
+  for DIR in "${FLATPAK_PERSIST_DATA_DIRS[@]}" ; do
+    FLATPAK_DIR="/var/data/Pathos/${DIR}"
+    WIN_DIR="${PATHOS_WINE_DIR}/${DIR}"
+    test ! -d "${FLATPAK_DIR}" && mkdir -p "${FLATPAK_DIR}"
+    test -e "${WIN_DIR}" && rm -Rf "${WIN_DIR}"
+    pushd "${PATHOS_WINE_DIR}" 1>/dev/null
+    ln -s "${FLATPAK_DIR}" "${DIR}"
+  done
   return 0
 }
 
