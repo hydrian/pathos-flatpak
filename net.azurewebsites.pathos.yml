@@ -41,10 +41,8 @@ modules:
     build-commands:
       - export 
       - install ${FLATPAK_ID}.sh /app/bin
-      - install ${FLATPAK_ID}.maker.sh /app/bin
       - install ${FLATPAK_ID}.common.sh /app/bin
       - install -Dm644 ${FLATPAK_ID}.desktop   /app/share/applications/
-      - install -Dm644 ${FLATPAK_ID}.maker.desktop   /app/share/applications/
       - install -Dm644 ${FLATPAK_ID}.svg       /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
     sources:
       - type: file
@@ -53,10 +51,6 @@ modules:
         path: net.azurewebsites.pathos.desktop
       - type: file
         path: net.azurewebsites.pathos.svg
-      - type: file
-        path: net.azurewebsites.pathos.maker.sh
-      - type: file
-        path: net.azurewebsites.pathos.maker.desktop
       - type: file
         path: net.azurewebsites.pathos.common.sh
 
