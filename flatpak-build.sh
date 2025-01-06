@@ -9,6 +9,7 @@ SCRIPT_FILE=$(realpath "${0}")
 GIT_ROOT_DIR=$(realpath "$(dirname "${SCRIPT_FILE}")") 
 echo "Building Flatpak image..."
 pushd "$GIT_ROOT_DIR" 1>/dev/null
+find ~/.local -iname net.azurewebsites.pathos\*\.desktop -delete
 test ! -d .flatpak && mkdir -p .flatpak
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
 	--default-branch=main \
