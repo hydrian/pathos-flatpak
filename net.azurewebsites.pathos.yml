@@ -1,0 +1,54 @@
+---
+
+id: net.azurewebsites.pathos
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+base: org.winehq.Wine
+base-version: stable-24.08
+command: 'pathos.sh'
+build-options: 
+  env: 
+    WINEDLLOVERRIDES: 'mscoree=d;mshtml=d'
+    WINEPREFIX: '/var/data/wineprefix'
+    LD_LIBRARY_PATH: '/app/lib32:/app/lib32/wine:/lib32:/lib32/wine'
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/GL/default/lib:/app/lib32:/app/lib32/wine
+  - --allow=devel # For Wine crash handling
+ # - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
+    # Need to link .desktop files
+  - --allow=multiarch
+  - --filesystem=~/.local/share/applications:create
+  - --share=network
+  - --system-talk-name=org.freedesktop.NetworkManager
+  - --device=dri
+  - --share=ipc
+  - --socket=pulseaudio
+  - --socket=x11
+  - --socket=wayland
+  - --filesystem=xdg-desktop
+  - --filesystem=xdg-data
+  - --filesystem=xdg-config
+  - --filesystem=xdg-cache
+  - --env=DOTNET_ROOT=/app/lib/dotnet
+  - --env=WINEPREFIX=/var/data/wineprefix
+  - --env=WINEDLLOVERRIDES=\'mscoree=d;mshtml=d\' 
+inherit-extensions:
+  - org.freedesktop.Platform.Compat.i386
+modules:
+  - name: "Pathos"
+    buildsystem: simple
+    build-commands:
+      - export 
+      - install pathos.sh /app/bin
+      - install -Dm644 net.azurewebsites.pathos.desktop /app/share/applications/net.azurewebsites.pathos.desktop
+      - install -Dm644 net.azurewebsites.pathos.svg /var/lib/share/icons/scalable/net.azurewebsites.pathos.svg
+    sources:
+      - type: file
+        path: pathos.sh
+      - type: file
+        path: net.azurewebsites.pathos.desktop
+      - type: file
+        path: net.azurewebsites.pathos.svg
+
+      
