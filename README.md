@@ -2,20 +2,21 @@
 
 
 
-## Requriments
+## Prerequestites
 * 64-bit x86_64 CPU 
 * Flatpak enabled [Linux distribution](https://flatpak.org/setup/) 
 * flatpak-builder installed 
+* git installed
 
 ## Building
 
-This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. Thus builds and installs the image. 
+This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos. 
 
 ```
 cd ~/git
-git clone https://github.com/callanh/pathos-official.git
-cd ~/git/pathos-offical
-./flatpak/flatpak-build.sh
+git clone https://github.com/hydrian/pathos-flatpak.git
+cd ~/git/pathos-flatpak
+./flatpak-build.sh
 ```
 
 <!-- ## Installation
@@ -29,9 +30,10 @@ flatpack install net.azurewebsites.pathos
 ## Running the application
 The first time you run the the flatpak it will have to setup a wine environment. This may take a while depending on your hardware.  
 
+You should have a 'Pathos' entry in your applciation menu.
+
+If you have issues, try running it from the command line. This may help diagnose some issues. 
+
 ```
 flatpak run net.azurewebsites.pathos
 ```
-
-
-##
