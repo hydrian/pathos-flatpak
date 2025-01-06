@@ -5,6 +5,7 @@
 * Flatpak enabled [Linux distribution](https://flatpak.org/setup/) 
 * flatpak-builder installed 
 * git installed
+* About 1.5GB free space in your $HOME directory
 
 ## Building
 
@@ -36,3 +37,19 @@ If you have issues, try running it from the command line. This may help diagnose
 ```
 flatpak run net.azurewebsites.pathos
 ```
+
+## Troubleshooting
+
+### Failed to Build image
+You get this error:
+```
+Exporting net.azurewebsites.pathos to repo
+FB: Running: flatpak build-export --arch=x86_64 '--exclude=/lib/debug/*' --include=/lib/debug/app '--exclude=/share/runtime/locale/*/*' '/home/hydrian@TYGERCLAN.LAN/git/pathos-flatpak/.flatpak/repo' .flatpak/build main
+error: opening repo: opendir(objects): No such file or directory
+Export failed: Child process exited with code 1
+FB: Unmounting read-only fs: fusermount -uz /home/hydrian@TYGERCLAN.LAN/git/pathos-flatpak/.flatpak/state/rofiles/rofiles-ImiZGI
+Failed to build image
+```
+You have a messed up repo directory. Delete the build directory and rerun the flatpak-build.sh script
+```
+rm -Rf ~/git/pathos-flatpak/.flatpak 
