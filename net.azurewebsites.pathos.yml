@@ -6,7 +6,7 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.winehq.Wine
 base-version: stable-24.08
-command: 'pathos.sh'
+command: 'net.azurewebsites.pathos.sh'
 build-options: 
   env: 
     WINEDLLOVERRIDES: 'mscoree=d;mshtml=d'
@@ -40,12 +40,12 @@ modules:
     buildsystem: simple
     build-commands:
       - export 
-      - install pathos.sh /app/bin
-      - install -Dm644 net.azurewebsites.pathos.desktop /app/share/applications/net.azurewebsites.pathos.desktop
-      - install -Dm644 net.azurewebsites.pathos.svg /var/lib/share/icons/scalable/net.azurewebsites.pathos.svg
+      - install net.azurewebsites.pathos.sh /app/bin
+      - install -Dm644 ${FLATPAK_ID}.desktop   /app/share/applications/
+      - install -Dm644 ${FLATPAK_ID}.svg       /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
     sources:
       - type: file
-        path: pathos.sh
+        path: net.azurewebsites.pathos.sh
       - type: file
         path: net.azurewebsites.pathos.desktop
       - type: file
