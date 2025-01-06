@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Pathos
+Comment=Pathos: Nethack Codex 
 Name[en]=Pathos
 Name[bg]=Pathos
 Name[cs]=Pathos
@@ -29,4 +30,4 @@ Icon=net.azurewebsites.pathos
 Terminal=false
 Type=Application
 Categories=Game
-StartupNotify=false
+StartupNotify=True
