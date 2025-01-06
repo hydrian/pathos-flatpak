@@ -1,6 +1,4 @@
-# Pathos Netack Codex Flatpak Installation for Linux
-
-
+# Pathos: Netack Codex Flatpak Installation for Linux
 
 ## Prerequestites
 * 64-bit x86_64 CPU 
@@ -13,6 +11,7 @@
 This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos. 
 
 ```
+flatpak install org.freedesktop.Sdk/x86_64/24.08 org.winehq.Wine/x86_64/stable-24.08 org.freedesktop.Platform.Compat.i386/x86_64/24.08
 cd ~/git
 git clone https://github.com/hydrian/pathos-flatpak.git
 cd ~/git/pathos-flatpak
