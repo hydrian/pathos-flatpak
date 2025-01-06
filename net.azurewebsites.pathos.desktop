@@ -30,4 +30,4 @@ Icon=net.azurewebsites.pathos
 Terminal=false
 Type=Application
 Categories=Game
-StartupNotify=True
+StartupNotify=true
