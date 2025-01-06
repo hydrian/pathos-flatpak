@@ -10,14 +10,15 @@ GIT_ROOT_DIR=$(realpath "$(dirname "${SCRIPT_FILE}")")
 echo "Building Flatpak image..."
 pushd "$GIT_ROOT_DIR" 1>/dev/null
 test ! -d .flatpak && mkdir -p .flatpak
-"${FLATPAK_BUILDER}" .flatpak/build \
-  --ccache \
+"${FLATPAK_BUILDER}" --verbose .flatpak/build \
+	--ccache \
   --force-clean \
+  --keep-build-dirs \
   --state-dir=.flatpak/state \
   --repo=.flatpak/repo  \
   net.azurewebsites.pathos.yml \
   --install \
-  --user
+  --user 
 if [ $? -ne 0 ] ; then
   echo "Failed to build image" 1>&2
   exit 2
