@@ -2,15 +2,15 @@
 
 ## Prerequestites
 
-* 64-bit x86_64 CPU 
-* Flatpak enabled [Linux distribution](https://flatpak.org/setup/) 
-* flatpak-builder installed 
+* 64-bit x86_64 CPU
+* Flatpak enabled [Linux distribution](https://flatpak.org/setup/)
+* flatpak-builder installed
 * git installed
 * About 1.5GB free space in your $HOME directory
 
 ## Building
 
-This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos. 
+This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos.
 
 ```bash
 flatpak install org.freedesktop.Sdk/x86_64/24.08 org.winehq.Wine/x86_64/stable-24.08 org.freedesktop.Platform.Compat.i386/x86_64/24.08
@@ -34,7 +34,7 @@ The first time you run the the flatpak it will have to setup a wine environment.
 
 You should have a 'Pathos' entry in your applciation menu.
 
-If you have issues, try running it from the command line. This may help diagnose some issues. 
+If you have issues, try running it from the command line. This may help diagnose some issues.
 
 ```bash
 flatpak run net.azurewebsites.pathos
