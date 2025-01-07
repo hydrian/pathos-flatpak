@@ -19,7 +19,7 @@ function setup_wine {
   show_message "Setting up Windows (Wine) is being setup. This may take a while."
   echo "Setting-up wine prefix..."
   echo "WINEPREIX: ${WINEPREFIX}"
-  WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine64 wineboot
+  WINEDLLOVERRIDES='mscoree=d;mshtml=d' xterm -e '/app/bin/wine64' 'wineboot'
   if [ $? -eq 0 ] ; then 
     echo "Wineboot complete"
   else 
@@ -27,7 +27,7 @@ function setup_wine {
     return 3
   fi
   echo "Setting up WineTricks"
-  winetricks --unattended 'corefonts' 'dotnet48' 'renderer=gdi'
+  xterm -e 'winetricks' '--unattended' 'corefonts' 'dotnet48' 'renderer=gdi'
   if [ $? -ne 0 ] ; then
     show_message "Winetricks failed to setup"
     return 4
