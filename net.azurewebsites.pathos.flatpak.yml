@@ -49,5 +49,24 @@ modules:
         path: net.azurewebsites.pathos.flatpak.svg
       - type: file
         path: net.azurewebsites.pathos.flatpak.common.sh
+  - name: libXmu
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.2.1.tar.gz
+        sha256: bf0902583dd1123856c11e0a5085bd3c6e9886fbbd44954464975fd7d52eb599
+  - name: libXaw
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://xorg.freedesktop.org/releases/individual/lib/libXaw-1.0.16.tar.gz
+        sha256: 012f90adf8739f2f023d63a5fee1528949cf2aba92ef7ac1abcfc2ae9cf28798
+  - name: xterm
+    buildsystem: autotools
+    config-opts:
+    - --disable-full-tgetent
+    sources:
+    - type: archive
+      url: https://invisible-mirror.net/archives/xterm/xterm-397.tgz
+      sha256: 2e9b742b9cba44ecec58074e513237f6cd6d5923f1737cb36a4e5625f4ae8662
 
-      
