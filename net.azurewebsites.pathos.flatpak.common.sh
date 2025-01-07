@@ -10,7 +10,7 @@ function show_message {
   MSG="${1}"
   LEVEL="${2:-normal}"
   echo "### ${MSG} ###"
-  NOTIFY_ID=$(notify-send --urgency="${LEVEL}" -i /app/share/icons/hicolor/scalable/apps/net.azurewebsites.pathos.svg  "${MSG}" -p 2>/dev/null)
+  NOTIFY_ID=$(notify-send --urgency="${LEVEL}" -i /app/share/icons/hicolor/scalable/apps/net.azurewebsites.pathos.flatpak.svg  "${MSG}" -p 2>/dev/null)
   return 0
 }
 

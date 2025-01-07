@@ -9,7 +9,12 @@ SCRIPT_FILE=$(realpath "${0}")
 GIT_ROOT_DIR=$(realpath "$(dirname "${SCRIPT_FILE}")") 
 echo "Building Flatpak image..."
 pushd "$GIT_ROOT_DIR" 1>/dev/null
-find ~/.local -iname net.azurewebsites.pathos\*\.desktop -delete
+flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest net.azurewebsites.pathos.flatpak.yml
+if [ $? -ne 0 ] ; then
+  echo "Did not pass lint tests" 1>&2
+  exit 2
+fi
+find ~/.local -iname net.azurewebsites.pathos.flatpak\*\.desktop -delete
 test ! -d .flatpak && mkdir -p .flatpak
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
 	--default-branch=main \
@@ -18,7 +23,7 @@ test ! -d .flatpak && mkdir -p .flatpak
   --keep-build-dirs \
   --state-dir=.flatpak/state \
   --repo=.flatpak/repo  \
-  net.azurewebsites.pathos.yml \
+  net.azurewebsites.pathos.flatpak.yml \
   --install \
   --user 
 if [ $? -ne 0 ] ; then

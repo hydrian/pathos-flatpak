@@ -1,12 +1,12 @@
 ---
 
-id: net.azurewebsites.pathos
+id: net.azurewebsites.pathos.flatpak
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.winehq.Wine
 base-version: stable-24.08
-command: 'net.azurewebsites.pathos.sh'
+command: 'net.azurewebsites.pathos.flatpak.sh'
 build-options: 
   env: 
     WINEDLLOVERRIDES: 'mscoree=d;mshtml=d'
@@ -24,12 +24,8 @@ finish-args:
   - --device=dri
   - --share=ipc
   - --socket=pulseaudio
-  - --socket=x11
   - --socket=wayland
-  - --filesystem=xdg-desktop
-  - --filesystem=xdg-data
-  - --filesystem=xdg-config
-  - --filesystem=xdg-cache
+  - --socket=fallback-x11
   - --env=DOTNET_ROOT=/app/lib/dotnet
   - --env=WINEPREFIX=/var/data/wineprefix
   - --env=WINEDLLOVERRIDES=\'mscoree=d;mshtml=d\' 
@@ -46,12 +42,12 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.svg       /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
     sources:
       - type: file
-        path: net.azurewebsites.pathos.sh
+        path: net.azurewebsites.pathos.flatpak.sh
       - type: file
-        path: net.azurewebsites.pathos.desktop
+        path: net.azurewebsites.pathos.flatpak.desktop
       - type: file
-        path: net.azurewebsites.pathos.svg
+        path: net.azurewebsites.pathos.flatpak.svg
       - type: file
-        path: net.azurewebsites.pathos.common.sh
+        path: net.azurewebsites.pathos.flatpak.common.sh
 
       
