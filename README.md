@@ -58,4 +58,4 @@ Failed to build image
 You have a messed up repo directory. Delete the build directory and rerun the `flatpak-build.sh` script.
 
 ```bash
-rm -Rf ~/git/pathos-flatpak/.flatpak 
+rm -Rf ~/git/pathos-flatpak/.flatpak/repo 
