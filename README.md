@@ -40,6 +40,24 @@ If you have issues, try running it from the command line. This may help diagnose
 flatpak run net.azurewebsites.pathos
 ```
 
+## Caveats
+
+### No Modding support
+
+Do to the lack of Microsoft Visual Studio or Build Tools on Wine or native Linux, this cannot be supported.
+
+### Full-Screen is Wrong Sized
+
+Do to Wine a issue, full-screen mode won't be supported as a default. Maxized window is recommended. If you want full-screen mode, take a look at [Work Arounds](#work-arounds)
+
+### No i386 Support
+
+The flatpak package only supports x86_64 even though the native Windows installer supports both i386 and x86_64. If there is enough demand, I may create an i386 build if there is enough demnd. Also, PR's are accepted for this feature.
+
+## Work Arounds
+
+* Full-screen mode can be supported with custom configuration. See [#3](https://github.com/hydrian/pathos-flatpak/issues/3#issuecomment-2578002145)
+
 ## Troubleshooting
 
 ### Failed to Build image
