@@ -69,10 +69,15 @@ function install_pathos {
   done 
 
   FLATPAK_PERSIST_DATA_DIRS=(
-    "Quests"
     "Adventures"
-    "Tracks"
+    "Bones"
+    "Campaigns"
+    "Glyphs"
+    "Logs"   
+    "Quests"
     "Sonics"
+    "Tracks"
+    "Vanities"  
   )
   for DIR in "${FLATPAK_PERSIST_DATA_DIRS[@]}" ; do
     FLATPAK_DIR="/var/data/Pathos/${DIR}"
