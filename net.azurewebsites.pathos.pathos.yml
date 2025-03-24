@@ -48,23 +48,3 @@ modules:
         path: net.azurewebsites.pathos.pathos.svg
       - type: file
         path: net.azurewebsites.pathos.pathos.common.sh
-  - name: inst
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
-        sha256: 67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd
-  - name: yad
-    buildsystem: simple
-    build-commands:
-      - export
-      - autoreconf -ivf
-      - intltoolize
-      - ./configure  --prefix=/app
-      - make
-      - make install
-      - gtk-update-icon-cache
-    sources:
-      - type: archive
-        url: https://github.com/v1cont/yad/archive/refs/tags/v14.1.tar.gz
-        sha256: 84ea6abe80106a6cebe14425d591517542d93f7c8b19729e2cf93f4db83e5cc3
