@@ -13,7 +13,6 @@
 This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos.
 
 ```bash
-flatpak install org.freedesktop.Sdk/x86_64/24.08 org.winehq.Wine/x86_64/stable-24.08 org.freedesktop.Platform.Compat.i386/x86_64/24.08
 cd ~/git
 git clone https://github.com/hydrian/pathos-flatpak.git
 cd ~/git/pathos-flatpak
@@ -37,8 +36,13 @@ You should have a 'Pathos' entry in your applciation menu.
 If you have issues, try running it from the command line. This may help diagnose some issues.
 
 ```bash
-flatpak run net.azurewebsites.pathos
+flatpak run net.azurewebsites.pathos.pathos
 ```
+
+> [!IMPORTANT]
+> The flatpak id has changed. This change was required to get this package published  to Flathub.
+> You can remove the old flatpak ID net.azurewebsites.pathos.flatpak
+
 
 ## Caveats
 

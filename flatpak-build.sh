@@ -13,6 +13,7 @@ FLATPAK_DEPENDENCIES=(
   'org.freedesktop.Platform/x86_64/24.08'
   'org.freedesktop.Sdk/x86_64/24.08'
   'org.winehq.Wine/x86_64/stable-24.08'
+  'org.freedesktop.Platform.GL.default/x86_64/24.08'
 )
 for DEP in "${FLATPAK_DEPENDENCIES[@]}" ; do
   echo "Installing dependency $DEP"
