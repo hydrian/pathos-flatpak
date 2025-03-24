@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash `
+#!/usr/bin/env -S bash -x
 FLATPAK_ID='net.azurewebsites.pathos.pathos'
 INSTALL_DIR="$(dirname $(realpath "${0}"))"
 FIFO_FILE=/tmp/setup.fifo
