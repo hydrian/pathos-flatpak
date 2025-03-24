@@ -1,5 +1,9 @@
-#!/usr/bin/env -S bash
+#!/usr/bin/env -S bash -x
 INSTALL_DIR="$(dirname $(realpath "${0}"))"
+FIFO_FILE=/tmp/setup.fifo
+test -e "${FIFO_FILE}" && rm "${FIFO_FILE}" 
+mkfifo "${FIFO_FILE}"
+
 source "${INSTALL_DIR}/${FLATPAK_ID}.common.sh"
 
 ############

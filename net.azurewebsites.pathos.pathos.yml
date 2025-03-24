@@ -1,12 +1,12 @@
 ---
 
-id: net.azurewebsites.pathos.flatpak
+id: net.azurewebsites.pathos.pathos
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 base: org.winehq.Wine
 base-version: stable-24.08
-command: 'net.azurewebsites.pathos.flatpak.sh'
+command: 'net.azurewebsites.pathos.pathos.sh'
 build-options: 
   env: 
     WINEDLLOVERRIDES: 'mscoree=d;mshtml=d'
@@ -15,7 +15,6 @@ build-options:
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib:/usr/lib/x86_64-linux-gnu/GL/default/lib:/usr/lib/x86_64-linux-gnu/openh264/extra:/usr/lib/x86_64-linux-gnu/GL/default/lib:/app/lib32:/app/lib32/wine
   - --allow=devel # For Wine crash handling
- # - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
     # Need to link .desktop files
   - --allow=multiarch
   - --filesystem=~/.local/share/applications:create
@@ -42,31 +41,30 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.svg       /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
     sources:
       - type: file
-        path: net.azurewebsites.pathos.flatpak.sh
+        path: net.azurewebsites.pathos.pathos.sh
       - type: file
-        path: net.azurewebsites.pathos.flatpak.desktop
+        path: net.azurewebsites.pathos.pathos.desktop
       - type: file
-        path: net.azurewebsites.pathos.flatpak.svg
+        path: net.azurewebsites.pathos.pathos.svg
       - type: file
-        path: net.azurewebsites.pathos.flatpak.common.sh
-  - name: libXmu
+        path: net.azurewebsites.pathos.pathos.common.sh
+  - name: inst
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://xorg.freedesktop.org/releases/individual/lib/libXmu-1.2.1.tar.gz
-        sha256: bf0902583dd1123856c11e0a5085bd3c6e9886fbbd44954464975fd7d52eb599
-  - name: libXaw
-    buildsystem: autotools
+        url: https://launchpad.net/intltool/trunk/0.51.0/+download/intltool-0.51.0.tar.gz
+        sha256: 67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd
+  - name: yad
+    buildsystem: simple
+    build-commands:
+      - export
+      - autoreconf -ivf
+      - intltoolize
+      - ./configure  --prefix=/app
+      - make
+      - make install
+      - gtk-update-icon-cache
     sources:
       - type: archive
-        url: https://xorg.freedesktop.org/releases/individual/lib/libXaw-1.0.16.tar.gz
-        sha256: 012f90adf8739f2f023d63a5fee1528949cf2aba92ef7ac1abcfc2ae9cf28798
-  - name: xterm
-    buildsystem: autotools
-    config-opts:
-    - --disable-full-tgetent
-    sources:
-    - type: archive
-      url: https://invisible-mirror.net/archives/xterm/xterm-397.tgz
-      sha256: 2e9b742b9cba44ecec58074e513237f6cd6d5923f1737cb36a4e5625f4ae8662
-
+        url: https://github.com/v1cont/yad/archive/refs/tags/v14.1.tar.gz
+        sha256: 84ea6abe80106a6cebe14425d591517542d93f7c8b19729e2cf93f4db83e5cc3

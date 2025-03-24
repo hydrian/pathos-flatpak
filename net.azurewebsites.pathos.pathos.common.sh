@@ -9,25 +9,35 @@ PATHOSMAKER_WIN_EXE="${PATHOS_WIN_DIR}/PathosMaker.exe"
 function show_message {
   MSG="${1}"
   LEVEL="${2:-normal}"
-  echo "### ${MSG} ###"
-  NOTIFY_ID=$(notify-send --urgency="${LEVEL}" -i /app/share/icons/hicolor/scalable/apps/net.azurewebsites.pathos.flatpak.svg  "${MSG}" -p 2>/dev/null)
+  ( echo "### ${MSG} ###" | tee  --output-error=exit -a "${FIFO_FILE}" ) 
+  NOTIFY_ID=$(notify-send --urgency="${LEVEL}" -i /app/share/icons/hicolor/scalable/apps/net.azurewebsites.pathos.pathos.svg  "${MSG}" -p 2>/dev/null)
   return 0
 }
 
 ### Setting Wine Environment
 function setup_wine {
+  yad \
+    --button=Ok:0 \
+    --text-info \
+    --auto-scroll \
+    --tail \
+    --wrap \
+    --auto-close \
+    --title="Pathos Wine Environment Setup"  < "${FIFO_FILE}" & 
   show_message "Setting up Windows (Wine) is being setup. This may take a while."
-  echo "Setting-up wine prefix..."
-  echo "WINEPREIX: ${WINEPREFIX}"
-  WINEDLLOVERRIDES='mscoree=d;mshtml=d' xterm -e '/app/bin/wine64' 'wineboot'
+  
+  ( echo "Setting-up wine prefix..." 2>&1 | tee --output-error=exit -a "${FIFO_FILE}")  
+  ( echo "WINEPREIX: ${WINEPREFIX}" 2>&1 | tee --output-error=exit -a "${FIFO_FILE}" ) 
+  ( WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine64 'wineboot' 2>&1 | tee -a "${FIFO_FILE}" )  
+
   if [ $? -eq 0 ] ; then 
-    echo "Wineboot complete"
+    ( echo "Wineboot complete" | tee -a "${FIFO_FILE}") 
   else 
     show_message "Wineboot failed"
     return 3
   fi
   echo "Setting up WineTricks"
-  xterm -e 'winetricks' '--unattended' 'corefonts' 'dotnet48' 'renderer=gdi'
+  ( winetricks '--unattended' 'corefonts' 'dotnet48' 'renderer=gdi' 2>&1 | tee  -a "${FIFO_FILE}" ) 
   if [ $? -ne 0 ] ; then
     show_message "Winetricks failed to setup"
     return 4
@@ -47,7 +57,7 @@ function install_pathos {
   echo "Downloading Pathos installer..."
   curl -L --progress-bar --output "${INSTALLER_FILE}" "https://www.dropbox.com/scl/fi/s4vrz7uixwltygqcltjcn/PathosSetup.exe?rlkey=0w7ar56sh8c5643gsbrmdrsj9&st=goqhhy2n&dl=1"
   echo "Running Pathos installer..."
-  wine64 "${INSTALLER_FILE}" "/verysilent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
+  wine64 "${INSTALLER_FILE}" "/silent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
   if [ $? -eq 0 ] ; then
     show_message "Pathos installer successful" low
   else
