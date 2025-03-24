@@ -10,7 +10,10 @@
 
 ## Building
 
-This is a temporary step. Once the development team gets Pathos on Flathub, this step will be unessessary. The following instructions builds and installs the flatpak image of Pathos.
+This is a temporary step. Once the development team gets Pathos on Flathub, this step will become unnecessary. The following instructions builds and installs the flatpak image of Pathos.
+
+> [!IMPORTANT]
+> Recently, the default branch changed from `main` to `stable`. If you have an older git checkout, you may need to update the remotes or just delete and reclone the git repository.
 
 ```bash
 cd ~/git
