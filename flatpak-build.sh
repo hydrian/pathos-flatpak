@@ -33,7 +33,6 @@ test ! -d .flatpak && mkdir -p .flatpak
   --keep-build-dirs \
   --state-dir=.flatpak/state \
   --repo=repo  \
-  -Dcompose=false \
   net.azurewebsites.pathos.pathos.yml \
   --install \
   --user 
