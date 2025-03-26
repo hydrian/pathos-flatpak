@@ -17,7 +17,7 @@ FLATPAK_DEPENDENCIES=(
 )
 for DEP in "${FLATPAK_DEPENDENCIES[@]}" ; do
   echo "Installing dependency $DEP"
-  flatpak install $DEP
+  flatpak install --user $DEP
 done 
 flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest net.azurewebsites.pathos.pathos.yml
 if [ $? -ne 0 ] ; then
