@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2025 ben.tyger@tygerclan.net -->
+<component type="desktop-application">
+	<id>net.azurewebsites.pathos.pathos</id>
+	<replaces>
+		<id>net.azurewebsites.pathos.flatpak</id>
+	</replaces>
+	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/</project_license>
+	<name>Pathos: Nethack</name>
+	<summary>A touch-friendky contemporary rogue-like game in the spirit  of NetHack</summary>
+	<developer id="net.azurewebsites.pathos">
+		<name>Callanh</name>
+	</developer>
+	<description>
+		<p>Hail, Adventurer!</p>
+		<p>Pathos is a dungeon adventure game with the soul of Nethack. Tile graphics, sound effects,
+			and
+			a touch-first interface. Fun and fast to play on iOS, Android, Windows, and Linux.</p>
+	</description>
+	<launchable type="desktop-id">net.azurewebsites.pathos.pathos.desktop</launchable>
+	<categories>
+		<category>Game</category>
+	</categories>
+	<keywords>
+		<keyword>Pathos</keyword>
+		<keyword>NetHack</keyword>
+		<keyword>Rogue-like</keyword>
+		<keyword>pixel art</keyword>
+	</keywords>
+	<content_rating type="oars-1.1">
+		<content_attribute id="violence-cartoon">moderate</content_attribute>
+		<content_attribute id="violence-fantasy">mild</content_attribute>
+		<content_attribute id="violence-bloodshed">mild</content_attribute>
+		<content_attribute id="violence-desecration">mild</content_attribute>
+		<content_attribute id="drugs-alcohol">moderate</content_attribute>
+		<content_attribute id="drugs-narcotics">moderate</content_attribute>
+		<content_attribute id="sex-nudity">mild</content_attribute>
+		<content_attribute id="language-profanity">mild</content_attribute>
+		<content_attribute id="language-humor">mild</content_attribute>
+		<content_attribute id="language-discrimination">mild</content_attribute>
+	</content_rating>
+	<url type="homepage">https://pathos.azurewebsites.net/</url>
+	<url type="donation">https://pathos.azurewebsites.net/donate.php</url>
+	<url type="translate">https://discord.gg/F7aky2QCUQ</url>
+	<url type="contribute">https://discord.gg/TRhRZhX</url>
+	<url type="vcs-browser">https://github.com/callanh/pathos-official</url>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://pathos.azurewebsites.net/screenshots/</image>
+			<caption>Select your character</caption>
+		</screenshot>
+	</screenshots>
+</component>

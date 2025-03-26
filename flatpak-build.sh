@@ -25,13 +25,15 @@ if [ $? -ne 0 ] ; then
   exit 2
 fi
 find ~/.local -iname net.azurewebsites.pathos.pathos\*\.desktop -delete
+rm -Rf .flatpak .flatpak-builder repo
 test ! -d .flatpak && mkdir -p .flatpak
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
 	--default-branch=main \
   --force-clean \
   --keep-build-dirs \
   --state-dir=.flatpak/state \
-  --repo=.flatpak/repo  \
+  --repo=repo  \
+  -Dcompose=false \
   net.azurewebsites.pathos.pathos.yml \
   --install \
   --user 
@@ -42,3 +44,6 @@ fi
 popd 1>/dev/null
 echo "Flatpak image built successfully"
 exit 0
+if [ "$1" == 'publish'] ; then
+  flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
+fi
