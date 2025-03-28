@@ -40,7 +40,8 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.desktop   /app/share/applications/
       - install -Dm644 ${FLATPAK_ID}.svg       /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - mkdir -p /app/share/${FLATPAK_ID}
-      - install -Dm644 Pathos-installer.exe /app/share/${FLATPAK_ID}/
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml /app/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 Pathos-installer.exe /app/share/${FLATPAK_ID}
     sources:
       - type: file
         path: net.azurewebsites.pathos.pathos.sh
@@ -52,3 +53,5 @@ modules:
         path: net.azurewebsites.pathos.pathos.common.sh
       - type: file
         path: installer/Pathos-installer.exe
+      - type: file
+        path: net.azurewebsites.pathos.pathos.metainfo.xml
