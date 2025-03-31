@@ -46,8 +46,20 @@
 	<url type="vcs-browser">https://github.com/callanh/pathos-official</url>
 	<screenshots>
 		<screenshot type="default">
-			<image>https://pathos.azurewebsites.net/screenshots/</image>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-PickCharacter1.png</image>
 			<caption>Select your character</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Gamplay1.png</image>
+			<caption>"Explore the dungeon," they said.</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Done.png</image>
+			<caption>"I'm not dead, yet!"</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Help1.png</image>
+			<caption>In-Game help</caption>
 		</screenshot>
 	</screenshots>
 </component>
