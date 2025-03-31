@@ -2,9 +2,7 @@
 <!-- Copyright 2025 ben.tyger@tygerclan.net -->
 <component type="desktop-application">
 	<id>net.azurewebsites.pathos.pathos</id>
-	<replaces>
-		<id>net.azurewebsites.pathos.flatpak</id>
-	</replaces>
+
 	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/flatpak/license.txt</project_license>
 	<metadata_license>FSFAP</metadata_license>
 	<name>Pathos: Nethack</name>
