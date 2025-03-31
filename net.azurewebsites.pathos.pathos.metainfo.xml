@@ -5,8 +5,8 @@
 	<replaces>
 		<id>net.azurewebsites.pathos.flatpak</id>
 	</replaces>
-	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/</project_license>
-	<metadata_license>FSFAP</metadata_licence>
+	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/flatpak/license.txt</project_license>
+	<metadata_license>FSFAP</metadata_license>
 	<name>Pathos: Nethack</name>
 	<summary>A touch-friendky contemporary rogue-like game in the spirit  of NetHack</summary>
 	<developer id="net.azurewebsites.pathos">
