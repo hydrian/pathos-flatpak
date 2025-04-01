@@ -17,6 +17,12 @@
 			a touch-first interface. Fun and fast to play on iOS, Android, Windows, and Linux.</p>
 	</description>
 	<launchable type="desktop-id">net.azurewebsites.pathos.pathos.desktop</launchable>
+	<!-- Desktop AND mobile supported -->
+	<recommends>
+	  <control>keyboard</control>
+		<control>pointing</control>
+		<control>touch</control>
+	</recommends>
 	<categories>
 		<category>Game</category>
 	</categories>
