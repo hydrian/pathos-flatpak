@@ -17,7 +17,7 @@ finish-args:
   - --allow=devel # For Wine crash handling
     # Need to link .desktop files
   - --allow=multiarch
-  - --filesystem=~/.local/share/applications:create
+#  - --filesystem=~/.local/share/applications:create
   - --share=network
   - --system-talk-name=org.freedesktop.NetworkManager
   - --device=dri

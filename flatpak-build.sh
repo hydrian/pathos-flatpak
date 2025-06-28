@@ -12,12 +12,16 @@ pushd "$GIT_ROOT_DIR" 1>/dev/null
 FLATPAK_DEPENDENCIES=(
   'org.freedesktop.Platform/x86_64/24.08'
   'org.freedesktop.Sdk/x86_64/24.08'
-  'org.winehq.Wine/x86_64/stable-24.08'
+	'org.winehq.Wine/x86_64/stable-24.08'
   'org.freedesktop.Platform.GL.default/x86_64/24.08'
 )
 for DEP in "${FLATPAK_DEPENDENCIES[@]}" ; do
-  echo "Installing dependency $DEP"
-  flatpak install --user $DEP
+#  DEP_SHORTNAME=$(echo "${DEP}"|cut -f1 -d / )
+#  flatpak show "${DEP_SHORTNAME}" >/dev/null
+  if [ $? -ne 0 ] ; then  
+    echo "Installing dependency $DEP"
+    flatpak install --user flathub $DEP
+  fi
 done 
 flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest net.azurewebsites.pathos.pathos.yml
 if [ $? -ne 0 ] ; then
@@ -28,7 +32,7 @@ find ~/.local -iname net.azurewebsites.pathos.pathos\*\.desktop -delete
 rm -Rf .flatpak .flatpak-builder repo
 test ! -d .flatpak && mkdir -p .flatpak
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
-	--default-branch=main \
+	--default-branch=stable \
   --force-clean \
   --keep-build-dirs \
   --state-dir=.flatpak/state \
