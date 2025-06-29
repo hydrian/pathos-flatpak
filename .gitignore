@@ -402,3 +402,4 @@ FodyWeavers.xsd
 # Flatpack
 .flatpak/
 .flatpak-builder/
+repo/
