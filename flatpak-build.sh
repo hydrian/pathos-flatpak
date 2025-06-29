@@ -1,4 +1,5 @@
-#!/usr/bin/env -S bash
+#!/usr/bin/env -S bash -x
+GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 FLATPAK_BUILDER=$(which flatpak-builder)
 if [ $? -ne 0 ] ; then
   echo "flatpak-builder is not installed." 1>&2 
@@ -28,11 +29,13 @@ if [ $? -ne 0 ] ; then
   echo "Did not pass lint tests" 1>&2
   exit 2
 fi
+echo 'cleaning up from previous build'
 find ~/.local -iname net.azurewebsites.pathos.pathos\*\.desktop -delete
 rm -Rf .flatpak .flatpak-builder repo
 test ! -d .flatpak && mkdir -p .flatpak
+echo "Running ${FLATPAK_BUILDER}"
 "${FLATPAK_BUILDER}" --verbose .flatpak/build \
-	--default-branch=stable \
+	--default-branch="${GIT_BRANCH}" \
   --force-clean \
   --keep-build-dirs \
   --state-dir=.flatpak/state \
@@ -46,7 +49,12 @@ if [ $? -ne 0 ] ; then
 fi
 popd 1>/dev/null
 echo "Flatpak image built successfully"
-exit 0
-if [ "$1" == 'publish'] ; then
+if [ "$1" == 'publish' ] ; then
+	echo 'Running flatpak linter for publishing'
   flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
+	if [ $? -ne 0 ] ; then
+		echo "Failed flatpak publishing lint"
+		exit 2
+	fi
 fi
+exit 0
