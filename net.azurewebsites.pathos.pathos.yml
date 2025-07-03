@@ -55,3 +55,4 @@ modules:
         path: installer/Pathos-installer.exe
       - type: file
         path: net.azurewebsites.pathos.pathos.metainfo.xml
+
