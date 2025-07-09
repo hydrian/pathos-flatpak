@@ -5,12 +5,12 @@
 	<replaces>
 		<id>net.azurewebsites.pathos.flatpak</id>
 	</replaces>
-	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/</project_license>
-	<metadata_license>FSFAP</metadata_licence>
+	<project_license>LicenseRef-proprietary=https://pathos.azurewebsites.net/flatpak/license.txt</project_license>
+	<metadata_license>FSFAP</metadata_license>
 	<name>Pathos: Nethack</name>
 	<summary>A touch-friendky contemporary rogue-like game in the spirit  of NetHack</summary>
 	<developer id="net.azurewebsites.pathos">
-		<name>Callanh</name>
+		<name>Callan Hodgskin</name>
 	</developer>
 	<description>
 		<p>Hail, Adventurer!</p>
@@ -19,6 +19,12 @@
 			a touch-first interface. Fun and fast to play on iOS, Android, Windows, and Linux.</p>
 	</description>
 	<launchable type="desktop-id">net.azurewebsites.pathos.pathos.desktop</launchable>
+	<!-- Desktop AND mobile supported -->
+	<recommends>
+	  <control>keyboard</control>
+		<control>pointing</control>
+		<control>touch</control>
+	</recommends>
 	<categories>
 		<category>Game</category>
 	</categories>
@@ -48,8 +54,20 @@
 	<url type="vcs-browser">https://github.com/callanh/pathos-official</url>
 	<screenshots>
 		<screenshot type="default">
-			<image>https://pathos.azurewebsites.net/screenshots/</image>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-PickCharacter1.png</image>
 			<caption>Select your character</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Gamplay1.png</image>
+			<caption>"Explore the dungeon," they said.</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Done.png</image>
+			<caption>"I'm not dead, yet!"</caption>
+		</screenshot>
+		<screenshot>
+			<image>https://pathos.azurewebsites.net/flatpak/Pathos-Help1.png</image>
+			<caption>In-Game help</caption>
 		</screenshot>
 	</screenshots>
 </component>
