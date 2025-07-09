@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash -x
+#!/usr/bin/env -S bash 
 GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 FLATPAK_BUILDER=$(which flatpak-builder)
 PATHOS_INSTALLER_FILE='Pathos-installer.exe'
