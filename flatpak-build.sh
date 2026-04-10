@@ -1,11 +1,8 @@
-#!/usr/bin/env -S bash 
+#!/usr/bin/env -S bash -x 
 GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-FLATPAK_BUILDER=$(which flatpak-builder)
+FLATPAK_BUILDER='flatpak run  org.flatpak.Builder'
+FLATPAK_BUILDER_LINT='flatpak run  --command=flatpak-builder-lint org.flatpak.Builder'
 PATHOS_INSTALLER_FILE='Pathos-installer.exe'
-if [ $? -ne 0 ] ; then
-  echo "flatpak-builder is not installed." 1>&2 
-  exit 2
-fi
 
 function getSHASum {
   local SOURCE=$1
@@ -27,21 +24,28 @@ GIT_ROOT_DIR=$(realpath "$(dirname "${SCRIPT_FILE}")")
 echo "Building Flatpak image..."
 pushd "$GIT_ROOT_DIR" 1>/dev/null
 FLATPAK_DEPENDENCIES=(
-  'org.freedesktop.Platform/x86_64/24.08'
-  'org.freedesktop.Sdk/x86_64/24.08'
-	'org.winehq.Wine/x86_64/stable-24.08'
-  'org.freedesktop.Platform.GL.default/x86_64/24.08'
+	'app/org.flatpak.Builder/x86_64/stable'
+  'runtime/org.freedesktop.Platform/x86_64/25.08'
+  'runtime/org.freedesktop.Sdk/x86_64/25.08'
+	'app/org.winehq.Wine/x86_64/wow64-25.08'
+  'runtime/org.freedesktop.Platform.GL.default/x86_64/25.08'
+	
 )
 
+echo "Adding Flathub flatpak repo as a user if not already added"
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+if [ $? -ne 0 ] ; then
+	exit $?
+fi
+
 for DEP in "${FLATPAK_DEPENDENCIES[@]}" ; do
-#  DEP_SHORTNAME=$(echo "${DEP}"|cut -f1 -d / )
-#  flatpak show "${DEP_SHORTNAME}" >/dev/null
+	flatpak info "${DEP}" 1>/dev/null 2>/dev/null
   if [ $? -ne 0 ] ; then  
     echo "Installing dependency $DEP"
-    flatpak install --user flathub $DEP
+    flatpak install flathub $DEP --noninteractive --user  
   fi
 done 
-flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest net.azurewebsites.pathos.pathos.yml
+$FLATPAK_BUILDER_LINT  manifest net.azurewebsites.pathos.pathos.yml
 if [ $? -ne 0 ] ; then
   echo "Did not pass lint tests" 1>&2
   exit 2
@@ -75,7 +79,7 @@ if [ "$1" == 'update' ] ; then
   popd 1>/dev/null
 fi
 echo "Running ${FLATPAK_BUILDER}"
-"${FLATPAK_BUILDER}" --verbose .flatpak/build \
+${FLATPAK_BUILDER} --verbose .flatpak/build \
 	--default-branch="${GIT_BRANCH}" \
   --force-clean \
   --keep-build-dirs \
@@ -92,7 +96,7 @@ popd 1>/dev/null
 echo "Flatpak image built successfully"
 if [ "$1" == 'publish' ] ; then
 	echo 'Running flatpak linter for publishing'
-  flatpak run --command=flatpak-builder-lint org.flatpak.Builder repo repo
+  $FLATPAK_BUILDER --command=flatpak-builder-lint repo repo
 	if [ $? -ne 0 ] ; then
 		echo "Failed flatpak publishing lint"
 		exit 2

@@ -1,11 +1,10 @@
 ---
-
 id: net.azurewebsites.pathos.pathos
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 base: org.winehq.Wine
-base-version: stable-24.08
+base-version: wow64-25.08
 command: 'net.azurewebsites.pathos.pathos.sh'
 build-options: 
   env: 
@@ -28,8 +27,8 @@ finish-args:
   - --env=DOTNET_ROOT=/app/lib/dotnet
   - --env=WINEPREFIX=/var/data/wineprefix
   - --env=WINEDLLOVERRIDES=\'mscoree=d;mshtml=d\' 
-inherit-extensions:
-  - org.freedesktop.Platform.Compat.i386
+#inherit-extensions:
+#  - org.freedesktop.Platform.Compat.i386
 modules:
   - name: "Pathos"
     buildsystem: simple

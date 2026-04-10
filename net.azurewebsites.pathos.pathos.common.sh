@@ -33,7 +33,7 @@ function setup_wine {
   
   ( echo "Setting-up wine prefix..." 2>&1 | tee --output-error=exit -a "${FIFO_FILE}")  
   ( echo "WINEPREIX: ${WINEPREFIX}" 2>&1 | tee --output-error=exit -a "${FIFO_FILE}" ) 
-  ( WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine64 'wineboot' )  
+  ( WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine 'wineboot' )  
 
   if [ $? -eq 0 ] ; then 
     echo "Wineboot complete"  
@@ -60,7 +60,7 @@ function install_pathos {
   FLATPAK_ADVENTURES_DIR='/var/data/adventures'
   INSTALLER_FILE="/app/share/${FLATPAK_ID}/pathos-installer.exe"
   echo "Running Pathos installer..."
-  wine64 "${INSTALLER_FILE}" "/silent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
+  wine "${INSTALLER_FILE}" "/silent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
   if [ $? -eq 0 ] ; then
     show_message "Pathos installer successful" low
   else
