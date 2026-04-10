@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bash -x
+#!/usr/bin/env -S bash
 FLATPAK_ID='net.azurewebsites.pathos.pathos'
 INSTALL_DIR="$(dirname $(realpath "${0}"))"
 FIFO_FILE=/tmp/setup.fifo
@@ -38,5 +38,5 @@ if [ ! -e "${PATHOS_WINE_EXE}" ] ; then
   fi
 fi
 WINEDLLOVERRIDES_RUN_DEFAULT='*d3d9,*d3d10,*d3d10_1,*d3d10core,*d3d11,*dxgi=b'
-WINEDLLOVERRIDES="${WINEDLLOVERRIDES_RUN:-$WINEDLLOVERRIDES_RUN_DEFAULT}" wine64 "${PATHOS_WIN_EXE}" 'windowed-mode' 
+WINEDLLOVERRIDES="${WINEDLLOVERRIDES_RUN:-$WINEDLLOVERRIDES_RUN_DEFAULT}" wine "${PATHOS_WIN_EXE}" 'windowed-mode' 
 exit $?

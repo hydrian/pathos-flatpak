@@ -33,7 +33,7 @@ function setup_wine {
   
   ( echo "Setting-up wine prefix..." 2>&1 | tee --output-error=exit -a "${FIFO_FILE}")  
   ( echo "WINEPREIX: ${WINEPREFIX}" 2>&1 | tee --output-error=exit -a "${FIFO_FILE}" ) 
-  ( WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine64 'wineboot' )  
+  ( WINEDLLOVERRIDES='mscoree=d;mshtml=d' /app/bin/wine 'wineboot' )  
 
   if [ $? -eq 0 ] ; then 
     echo "Wineboot complete"  
@@ -46,6 +46,35 @@ function setup_wine {
   if [ $? -ne 0 ] ; then
     show_message "Winetricks failed to setup"
     return 4
+  fi
+
+	### Installing .Net 10.0.5 Desktop Runtime environment
+	WINE_TEMP_DIR="${WINEPREFIX}/drive_c/windows/temp"
+	DOTNET10_FILENAME='windowsdesktop-runtime-10.0.5-win-x64.exe'
+	DOTNET10_CHECKSUM='cbb1ad53aecc54264488cc5c0be938991770750209cf4acd383bbe8af57db679f4d5988e6281a6d6a46b4e141db3d3d539ea764250b4ab48871972a610944b40'
+	if [ ! -d "${WINEPREFIX}/drive_c/Program Files/dotnet/shared/Microsoft.WindowsDesktop.App/10.0.5" ] ; then
+		pushd $WINE_TEMP_DIR 1>/dev/null
+		show_message "Installing .Net 10.0.5 manually"
+		show_message "Downloading .Net 10.0.5"
+		if (wget -O "./${DOTNET10_FILENAME}" "https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/10.0.5/windowsdesktop-runtime-10.0.5-win-x64.exe") ; then
+			show_message "Download complete"
+		else
+			show_message "Download failed!"
+			return 5
+		fi
+		echo "${DOTNET10_CHECKSUM} windowsdesktop-runtime-10.0.5-win-x64.exe" | sha512sum --check - 1>/dev/null
+		if [ $? -ne 0 ] ; then	
+			show_message ".Net 10 Download failed validation. Download corrupt or fraudulant."
+		  return 6
+		fi 
+		show_message "Running .Net 10 installer"
+		wine "./${DOTNET10_FILENAME}" /quiet
+		if [ $? -ne 0 ] ; then
+			show_message ".Net 10 Desktop Runtime installer failed"
+			return 7
+		fi 		
+		popd 1>/dev/null
+
   fi
   show_message "Windows (Wine) environment setup successfully" low
   return 0
@@ -60,7 +89,7 @@ function install_pathos {
   FLATPAK_ADVENTURES_DIR='/var/data/adventures'
   INSTALLER_FILE="/app/share/${FLATPAK_ID}/pathos-installer.exe"
   echo "Running Pathos installer..."
-  wine64 "${INSTALLER_FILE}" "/silent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
+  wine "${INSTALLER_FILE}" "/silent" "/dir=${PATHOS_WIN_DIR}" "/LOG" "/DoNotLaunchGame"
   if [ $? -eq 0 ] ; then
     show_message "Pathos installer successful" low
   else
