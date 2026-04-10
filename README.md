@@ -46,6 +46,11 @@ flatpak run net.azurewebsites.pathos.pathos
 > The flatpak id has changed. This change was required to get this package published  to Flathub.
 > You can remove the old flatpak ID net.azurewebsites.pathos.flatpak
 
+## Upgrades
+
+Occationally, Pathos changes dependances or requires upgrades to the wine environment. This often requires wine to be reinstalled. To just reinstall wine, run the following command: `flatpak run net.azurewebsites.pathos.pathos wine-reinstall`
+
+This will rebuild the wine environment. This should not effect any savegames. 
 
 ## Caveats
 
