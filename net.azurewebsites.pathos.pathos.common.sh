@@ -42,7 +42,7 @@ function setup_wine {
     return 3
   fi
   echo "Setting up WineTricks"
-  ( winetricks '--unattended' 'corefonts' 'dotnet48' 'renderer=gdi' 'win10' 2>&1  ) 
+  ( winetricks '--unattended' 'corefonts' 'dotnet48' 'renderer=gdi' 'win10' 'ie8' 2>&1  ) 
   if [ $? -ne 0 ] ; then
     show_message "Winetricks failed to setup"
     return 4
