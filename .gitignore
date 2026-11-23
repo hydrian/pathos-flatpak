@@ -403,3 +403,4 @@ FodyWeavers.xsd
 .flatpak/
 .flatpak-builder/
 repo/
+pathoslinux/dist/

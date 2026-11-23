@@ -46,6 +46,23 @@ flatpak run net.azurewebsites.pathos.pathos
 > The flatpak id has changed. This change was required to get this package published  to Flathub.
 > You can remove the old flatpak ID net.azurewebsites.pathos.flatpak
 
+## Direct Wine installer
+
+For a non-Flatpak install, the repository can build a portable installer archive:
+
+```bash
+python3 pathoslinux/package.py
+tar -xzf pathoslinux/dist/PathosLinuxInstaller.tar.gz
+cd PathosLinuxInstaller
+./install.sh
+```
+
+The installer checks for Wine, Winetricks, Python, and download/checksum tools.
+If host prerequisites are missing, it asks once before offering package installation
+through apt, dnf, pacman, or zypper. It detects existing Winetricks verbs and the
+.NET 10 Desktop Runtime, installing only missing components. The Wine prefix setup
+includes Internet Explorer 8 for the game's embedded browser content.
+
 ## Upgrades
 
 Occationally, Pathos changes dependances or requires upgrades to the wine environment. This often requires wine to be reinstalled. To just reinstall wine, run the following command: `flatpak run net.azurewebsites.pathos.pathos wine-reinstall`
